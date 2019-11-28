@@ -19,6 +19,9 @@ describe("Demo Spec", () => {
       'validData': {
         "name": "test",
         "code": "test"
+      },
+      "invalidData": {
+        "name": "test"
       }
     };
 
@@ -37,6 +40,18 @@ describe("Demo Spec", () => {
         expect(resp.body).to.be.deep.equal(demoData["validData"])
         expect(resp.body).to.have.property('name');
         expect(resp.body).to.have.property('code');
+      })
+      done();
+  });
+
+  it("Should call demo route url with error response", done => {
+    request( app )
+      .post( demoRoutegUrl )
+      .send( demoData['validData'] )
+      .set('Accept', 'application/json')
+      .expect(400)
+      .end( (err, resp) =>  {
+        expect(err).to.be.not.null;
       })
       done();
   });

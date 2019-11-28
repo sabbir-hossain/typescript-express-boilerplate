@@ -11,13 +11,13 @@ export class DemoController implements IDemoController {
 
   constructor( ) {}
 
-  // create(data:IDemoModel):Promise<IDemoModel> {
-  //   return Promise.resolve(data);
-  // }
-
   create(data:IDemoModel):any {
-    validation(data, demoRules);
-    return Promise.resolve(data);
+    try {
+      validation(data, demoRules);
+      return Promise.resolve(data);
+    } catch (err) {
+      return Promise.reject(err);
+    }
   }
 
 }
