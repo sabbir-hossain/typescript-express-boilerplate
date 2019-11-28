@@ -2,22 +2,22 @@ import {injectable, inject} from "inversify";
 import {TYPES} from "../../types";
 
 import {IDemoMethods} from "./demo.methods.interface";
-import {IDemoModel} from "./demo.model.interface";
+import {IDemoModel, demoRules} from "./demo.model.interface";
 
-// import { validation } from './../../helpers/validator';
+import { validation } from './../../helpers/validator';
 
 @injectable()
 export class DemoController implements IDemoController {
 
-  constructor( ) {
-  }
+  constructor( ) {}
 
   // create(data:IDemoModel):Promise<IDemoModel> {
-  //   return Promise<IDemoModel> data;
+  //   return Promise.resolve(data);
   // }
 
   create(data:IDemoModel):any {
-    return data;
+    validation(data, demoRules);
+    return Promise.resolve(data);
   }
 
 }

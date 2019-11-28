@@ -7,21 +7,21 @@ import {IDemoController} from "./demo.controller";
 @injectable()
 class DemoRoute implements IDemoRoute {
 
-  private _classController:IDemoController;
+  private _demoController:IDemoController;
 
-  constructor( @inject(TYPES.IDemoController) classController:IDemoController ) {
-    this._classController = classController;
+  constructor( @inject(TYPES.IDemoController) demoController:IDemoController ) {
+    this._demoController = demoController;
   }
 
-  async create(req: Request, res: Response, next: NextFunction) {
-    try {
-      const result = await this._classController.create(req.body);
-      return res.send(result);
-    }
-    catch(error) {
-      console.log({error})
-      return res.send(error);
-    }
+  create(req: Request, res: Response, next: NextFunction) {
+
+    return  this._demoController.create(req.body)
+      .then(resp => {
+        return res.send(resp);
+      })
+      .catch(error => {
+        return res.send(error);
+      })
   }
 }
 

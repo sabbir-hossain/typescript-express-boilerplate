@@ -15,7 +15,8 @@
     "paths": {
       "@common/*": ["components/common/*"],
       "@utils/*": ["utils/*"]
-    }
+    },
+    "resolveJsonModule": true
   },
   "exclude": [
     "node_modules",

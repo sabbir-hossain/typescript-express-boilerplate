@@ -13,7 +13,7 @@ export function toBoolean(value) {
   );
 }
 
-export const throwError = name => {
+export const throwError = (name="") => {
   throw `missing parameter value for ${name}`;
 };
 

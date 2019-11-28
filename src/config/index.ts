@@ -1,4 +1,4 @@
-import * as configInfo from "../config.json";
+import * as configInfo from "../../config.json";
 
 export const config = configInfo;
 

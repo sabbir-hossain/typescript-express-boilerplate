@@ -1,12 +1,5 @@
 import "reflect-metadata";
-import * as mocha from "mocha";
-import * as chai from "chai";
-import * as request from "supertest";
-
-const expect = chai.expect;
-
-import {TYPES} from "../src/types";
-import {container} from "../src/inversify.config";
+import {expect} from "chai";
 
 describe('chai test', () => {
 
