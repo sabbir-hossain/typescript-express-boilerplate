@@ -1,19 +1,17 @@
 import "reflect-metadata";
 import * as mocha from "mocha";
-import {expect} from "chai";
+import * as chai from "chai";
 import * as request from "supertest";
-
-import {TYPES} from "../src/types";
-import {container} from "../src/inversify.config";
+const expect = chai.expect;
 
 import {app} from "../src/app";
 
 describe("Demo Spec", () => {
 
-  let demoData, demoRoutegUrl;
+  let demoData, demoRouteUrl;
 
   beforeEach((done) => {
-    demoRoutegUrl = '/demo/create';
+    demoRouteUrl = '/demo/create';
 
     demoData = {
       'validData': {
@@ -31,7 +29,7 @@ describe("Demo Spec", () => {
    
   it("Should call demo route url", done => {
     request( app )
-      .post( demoRoutegUrl )
+      .post( demoRouteUrl )
       .send( demoData['validData'] )
       .set('Accept', 'application/json')
       .expect(200)
@@ -46,7 +44,7 @@ describe("Demo Spec", () => {
 
   it("Should call demo route url with error response", done => {
     request( app )
-      .post( demoRoutegUrl )
+      .post( demoRouteUrl )
       .send( demoData['validData'] )
       .set('Accept', 'application/json')
       .expect(400)

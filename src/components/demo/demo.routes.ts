@@ -14,7 +14,6 @@ class DemoRoute implements IDemoRoute {
   }
 
   create(req: Request, res: Response, next: NextFunction) {
-
     return  this._demoController.create(req.body)
       .then(resp => {
         return res.send(resp);

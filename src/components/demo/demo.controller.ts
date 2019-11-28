@@ -14,7 +14,7 @@ export class DemoController implements IDemoController {
   create(data:IDemoModel):any {
     try {
       validation(data, demoRules);
-      return Promise.resolve(data);
+      return Promise.resolve({...data, a: "aaaa"});
     } catch (err) {
       return Promise.reject(err);
     }
