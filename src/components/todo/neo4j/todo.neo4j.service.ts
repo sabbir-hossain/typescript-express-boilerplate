@@ -22,6 +22,7 @@ export class TodoNeo4jService  implements ITodoNeo4jService  {
       RETURN properties(td)`;
 
       return Neo4j.db.run(query, todoData)
+        .then(resp => resp[0])
         .then(resp => resolve(resp))
         .catch(error => reject(error));
     })

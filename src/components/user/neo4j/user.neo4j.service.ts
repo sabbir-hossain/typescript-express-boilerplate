@@ -18,10 +18,11 @@ export class UserNeo4jService  implements IUserNeo4jService  {
     userData["updatedAt"] = `${todayISOString()}`;
 
     return new Promise( (resolve, reject) => {
-      const query = `CREATE (td:${userNeo4jTbl} ${Neo4j.insertQuery(userData)})
-      RETURN properties(td)`;
+      const query = `CREATE (usr:${userNeo4jTbl} ${Neo4j.insertQuery(userData)})
+      RETURN properties(usr)`;
 
       return Neo4j.db.run(query, userData)
+        .then(resp => resp[0])
         .then(resp => resolve(resp))
         .catch(error => reject(error));
     })

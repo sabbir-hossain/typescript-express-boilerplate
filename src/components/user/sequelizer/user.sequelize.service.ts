@@ -7,7 +7,7 @@ import {IUserMethods} from "../user.methods.interface";
 import { ISequelize } from "../../../database/sequelize/sequelize.interface";
 
 import { sequelize } from "../../../database";
-import { userSequelizeTbl, userStatus } from "../../../config";
+import { userSequelizeTbl, userStatus, userRole } from "../../../config";
 
 @injectable()
 export class UserSequelizeService  implements IUserSequelizeService  {
@@ -23,24 +23,19 @@ export class UserSequelizeService  implements IUserSequelizeService  {
         type: new DataTypes.STRING(128),
         allowNull: false,
       },
+      email: {
+        type: new DataTypes.STRING(128),
+        allowNull: false,
+      },
+      password: {
+        type: new DataTypes.STRING(128),
+        allowNull: false,
+      },
       status: {
-        type: new DataTypes.ENUM( userStatus.COMPLETE, userStatus.IN_COMPLETE, userStatus.IN_PROGRESS )
+        type: new DataTypes.ENUM( userStatus.ACTIVE, userStatus.IN_ACTIVE, userStatus.DELETED )
       },
-      startDate: {
-        type: new DataTypes.DATE,
-        allowNull: true
-      },
-      endDate: {
-        type: new DataTypes.DATE,
-        allowNull: true
-      },
-      ref: {
-        type: new DataTypes.STRING(128),
-        allowNull: true
-      },
-      user: {
-        type: new DataTypes.STRING(128),
-        allowNull: true
+      role: {
+        type: new DataTypes.ENUM( userRole.ADMIN, userRole.CLIENT )
       },
       createdAt: {
         type: new DataTypes.DATE,
@@ -72,14 +67,13 @@ export interface IUserSequelizeService  extends IUserMethods {
 
 /*
 
-CREATE TABLE `userdb`.`useres` (
+CREATE TABLE `tododb`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(245) NULL,
+  `email` VARCHAR(245) NULL,
+  `password` VARCHAR(245) NULL,
   `status` VARCHAR(245) NULL,
-  `startDate` DATE NULL,
-  `endDate`  DATE NULL,
-  `ref` VARCHAR(245) NULL,
-  `user` VARCHAR(245) NULL,
+  `role` VARCHAR(245) NULL,
   `created_at` DATE NULL,
   `modified_at` DATE NULL,
   PRIMARY KEY (`id`)

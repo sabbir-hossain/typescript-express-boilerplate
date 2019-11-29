@@ -11,18 +11,17 @@ export const configENV = config[ENV];
 
 export const configDB = configENV[DB_ENV];
 
-export const todoMongoTbl = todoTable.todoMongoTbl;
-export const todoStatus = todoTable.todoStatus;
+// Todo Table
+export const todoMongoTbl = todoTable.mongoTbl;
+export const todoStatus = todoTable.status;
+export const todoSequelizeTbl = todoTable.sequelizeTbl;
+export const todoNeo4jTbl = todoTable.neo4jTbl;
+export const todoDynamoDbTbl = todoTable.dynamoDbTbl;
 
-export const todoSequelizeTbl = todoTable.todoSequelizeTbl;
-
-export const todoNeo4jTbl = todoTable.todoNeo4jTbl;
-export const todoDynamoDbTbl = todoTable.todoDynamoDbTbl;
-
-export const userMongoTbl = userTable.userMongoTbl;
-export const userStatus = userTable.userStatus;
-
-export const userSequelizeTbl = userTable.userSequelizeTbl;
-
-export const userNeo4jTbl = userTable.userNeo4jTbl;
-export const userDynamoDbTbl = userTable.userDynamoDbTbl;
+// User Table
+export const userMongoTbl = userTable.mongoTbl;
+export const userStatus = userTable.status;
+export const userSequelizeTbl = userTable.sequelizeTbl;
+export const userNeo4jTbl = userTable.neo4jTbl;
+export const userDynamoDbTbl = userTable.dynamoDbTbl;
+export const userRole = userTable.role;

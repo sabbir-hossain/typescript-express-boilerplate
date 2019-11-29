@@ -30,10 +30,10 @@ export class UserService  implements IUserService  {
 
   create(data:IUserModel):Promise<IUserModel[]> {
     const result = [ 
-      // this._userMongooseService.create(data),
-      // this._userSequelizeService.create(data),
+      this._userMongooseService.create(data),
+      this._userSequelizeService.create(data),
       this._userDynamoDbService.create(data),
-      // this._userNeo4jService.create(data)
+      this._userNeo4jService.create(data)
     ];
 
     return Promise.all(result)

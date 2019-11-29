@@ -1,13 +1,13 @@
-export const todoMongoTbl = "todo";
+export const mongoTbl = "";
 
-export enum todoStatus {
+export enum status {
   COMPLETE="COMPLETE",
   IN_COMPLETE="IN_COMPLETE",
   IN_PROGRESS="IN_PROGRESS"
 }
 
-export const todoSequelizeTbl = "todo";
+export const sequelizeTbl = "";
 
-export const todoNeo4jTbl = "todo";
+export const neo4jTbl = "";
 
-export const todoDynamoDbTbl = "todo";
+export const dynamoDbTbl = "";

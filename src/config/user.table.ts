@@ -1,13 +1,18 @@
-export const userMongoTbl = "user";
-
-export enum userStatus {
-  COMPLETE="COMPLETE",
-  IN_COMPLETE="IN_COMPLETE",
-  IN_PROGRESS="IN_PROGRESS"
+export enum status {
+  ACTIVE="ACTIVE",
+  IN_ACTIVE="IN_COMPLETE",
+  DELETED="DELETED"
 }
 
-export const userSequelizeTbl = "user";
+export enum role {
+  ADMIN="ADMIN",
+  CLIENT="CLIENT"
+}
 
-export const userNeo4jTbl = "user";
+export const mongoTbl = "user";
 
-export const userDynamoDbTbl = "user";
+export const sequelizeTbl = "user";
+
+export const neo4jTbl = "user";
+
+export const dynamoDbTbl = "user";

@@ -1,6 +1,6 @@
-import { mongoose, ObjectId } from "../../../database";
+import { mongoose } from "../../../database";
 const Schema = mongoose.Schema;
-import { userMongoTbl, userStatus } from "../../../config";
+import { userMongoTbl, userStatus, userRole } from "../../../config";
 
 export const userMongoSchema = new Schema({
   name: {
@@ -9,26 +9,21 @@ export const userMongoSchema = new Schema({
     trim: true,
     regExp: /\w+/ig
   },
+  password: {
+    type: String,
+    required: true
+  },
   status: {
     type: String,
     index: true,
     required: true,
-    enumValues: [ userStatus.COMPLETE, userStatus.IN_COMPLETE, userStatus.IN_PROGRESS ]
+    enumValues: [ userStatus.ACTIVE, userStatus.IN_ACTIVE, userStatus.DELETED ]
   },
-  ref: {
-    type: ObjectId,
+  role: {
+    type: String,
     index: true,
-    default: null
-  },
-  startDate: {
-    type: Date,
-    default: null,
-    min: Date.now
-  },
-  endDate: {
-    type: Date,
-    default: null,
-    min: Date.now
+    required: true,
+    enumValues: [ userRole.ADMIN, userRole.CLIENT ]
   },
   createdAt: { 
     type: Date, 
