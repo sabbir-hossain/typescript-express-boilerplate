@@ -2,7 +2,7 @@ import * as mongoose from "mongoose";
 
 import { ENV, configENV } from "../../config/index";
 console.log({ ENV, configENV})
-const { host, port, username, password, db:dbName } = configENV.mongo.db;
+const { host, port, username, password, db:dbName } = configENV["mongo"].db;
 
 const mongoURI = ENV === 'prod'
   ? `mongodb://${username}:${password}@${host}:${port}/${dbName}?authSource=${dbName}`
@@ -27,4 +27,6 @@ db.on('open', function callback(err) {
   }
 });
 
-export { db, mongoose };
+const ObjectId = mongoose.Schema.Types.ObjectId;
+
+export { db, mongoose, ObjectId };

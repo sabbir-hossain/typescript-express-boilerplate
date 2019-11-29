@@ -7,7 +7,6 @@ import { TYPES } from "../types";
 
 import { ITodoRoute } from './todo/todo.routes';
 
-
 @injectable()
 export class ComponentRoutes implements IComponentRoutes {
   private router: Router;
@@ -19,7 +18,6 @@ export class ComponentRoutes implements IComponentRoutes {
   }
 
   setupRoutes(app): any {
-
     // Todo
     this.router.post("/todo/create", this.classRoute.create.bind(this.classRoute))
 

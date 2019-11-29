@@ -1,12 +1,22 @@
+import { todoStatus } from './../../config';
+
 export interface ITodoModel {
-  id:string;
+  id?:string;
   name: string;
-  code: string;
-  createdAt: Date;
-  updatedAt: Date;
+  status: string;
+  startDate?:Date;
+  endDate?:Date;
+  ref?: string;
+  user?:string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export const todoRules = {
   name: "string|required",
-  code: "string|required"
+  status: `string|in:${todoStatus.COMPLETE},${todoStatus.IN_COMPLETE},${todoStatus.IN_PROGRESS}`,
+  ref: "string",
+  startDate: "date",
+  endDate: "date",
+  user: "string"
 }

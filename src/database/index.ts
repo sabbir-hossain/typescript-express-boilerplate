@@ -1,3 +1,3 @@
-import { mongoose } from "./mongo";
+import { mongoose, ObjectId } from "./mongoose";
 
-export { mongoose };
+export { mongoose, ObjectId };
