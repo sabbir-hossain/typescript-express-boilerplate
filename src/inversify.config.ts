@@ -27,4 +27,11 @@ container.bind<IDemoRoute>(TYPES.IDemoRoute).to(DemoRoute);
 container.bind<IDemoController>(TYPES.IDemoController).to(DemoController);
 // container.bind<IDemoService>(TYPES.IDemoService).to(DemoService);
 
-export {container};
+function bindDependencies(func, dependencies) {
+  let injections = dependencies.map((dependency) => {
+      return container.get(dependency);
+  });
+  return func.bind(func, ...injections);
+}
+
+export {container, bindDependencies};

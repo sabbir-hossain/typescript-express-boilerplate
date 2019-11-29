@@ -22,6 +22,8 @@ import { validation } from "./validator";
 
 import { today, todayISOString } from "./date";
 
+import { errorHandler } from "./responseHandler";
+
 export {
   uuid,
   throwError,
@@ -42,4 +44,6 @@ export {
   today,
   todayISOString,
 
+  // response
+  errorHandler
 };

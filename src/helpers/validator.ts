@@ -40,10 +40,8 @@ export const validation = (data, rules) => {
   if (validator.fails()) {
     throw {
       status: 400,
-      errors: {
-        title: "Invalid Parameter(s)",
-        invalidParams: validator.errors.all()
-      }
+      title: "Invalid Parameter(s)",
+      invalidParams: validator.errors.all()
     };
   }
 

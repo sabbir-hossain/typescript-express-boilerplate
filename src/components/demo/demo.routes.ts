@@ -4,6 +4,8 @@ import {TYPES} from "../../types";
 
 import {IDemoController} from "./demo.controller";
 
+import { errorHandler } from "../../helpers";
+
 @injectable()
 class DemoRoute implements IDemoRoute {
 
@@ -14,12 +16,12 @@ class DemoRoute implements IDemoRoute {
   }
 
   create(req: Request, res: Response, next: NextFunction) {
-    return  this._demoController.create(req.body)
+    return this._demoController.create(req.body)
       .then(resp => {
         return res.send(resp);
       })
       .catch(error => {
-        return res.send(error);
+        return errorHandler(res, error);
       })
   }
 }
