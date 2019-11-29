@@ -5,7 +5,7 @@ import { Router } from "express";
 import { TYPES } from "../types";
 // Common
 
-import { IDemoRoute } from './demo/demo.routes';
+import { ITodoRoute } from './todo/todo.routes';
 
 
 @injectable()
@@ -13,15 +13,15 @@ export class ComponentRoutes implements IComponentRoutes {
   private router: Router;
 
   constructor(
-    @inject(TYPES.IDemoRoute) private classRoute:IDemoRoute
+    @inject(TYPES.ITodoRoute) private classRoute:ITodoRoute
   ) {
     this.router = express.Router();
   }
 
   setupRoutes(app): any {
 
-    // Demo
-    this.router.post("/demo/create", this.classRoute.create.bind(this.classRoute))
+    // Todo
+    this.router.post("/todo/create", this.classRoute.create.bind(this.classRoute))
 
     return this.router;
   }

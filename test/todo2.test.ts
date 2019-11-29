@@ -15,31 +15,31 @@ const sandbox = sinon.createSandbox();
 
 import {TYPES} from "../src/types";
 import {container, bindDependencies} from "../src/inversify.config";
-import { IDemoController } from "../src/components/demo/demo.controller";
-import { IDemoRoute } from "../src/components/demo/demo.routes";
+import { ITodoController } from "../src/components/todo/todo.controller";
+import { ITodoRoute } from "../src/components/todo/todo.routes";
 
-describe.only("Demo Spec 2", () => {
+describe.only("Todo Spec 2", () => {
 
-  let demoData, demoRouteUrl, demoController, demoRoute, insertStub;
+  let todoData, todoRouteUrl, todoController, todoRoute, insertStub;
   
-  demoController = container.get<IDemoController>(TYPES.IDemoController);
-  demoRouteUrl = '/demo/create';
+  todoController = container.get<ITodoController>(TYPES.ITodoController);
+  todoRouteUrl = '/todo/create';
 
   beforeEach((done) => {
     
     
     
     // let warriors = new ContainerModule((bind: Bind) => {
-    //   bind<IDemoController>(TYPES.IDemoController).to(Ninja);
+    //   bind<ITodoController>(TYPES.ITodoController).to(Ninja);
     // });
   
     // const thisContainer = new Container();
-    // thisContainer.load(demoController);
-    // demoRoute = bindDependencies(route.create, [TYPES.IDemoController]);
+    // thisContainer.load(todoController);
+    // todoRoute = bindDependencies(route.create, [TYPES.ITodoController]);
 
-    insertStub = sandbox.stub(demoController, 'create');
+    insertStub = sandbox.stub(todoController, 'create');
 
-    demoData = {
+    todoData = {
       'validData': {
         "name": "test",
         "code": "test"
@@ -58,11 +58,11 @@ describe.only("Demo Spec 2", () => {
     // insertStub.restore();
   });
 
-  it("Should call demo route url", async done => {
-    // console.log({demoRoute});
-    demoRoute  = container.get<IDemoRoute>(TYPES.IDemoRoute);
+  it("Should call todo route url", async done => {
+    // console.log({todoRoute});
+    todoRoute  = container.get<ITodoRoute>(TYPES.ITodoRoute);
     const stub =  insertStub.returns( { name: "test xyz", code: "test abc"});
-    const result = await demoRoute.create({body: demoData.validData}, {send: (params) => params});
+    const result = await todoRoute.create({body: todoData.validData}, {send: (params) => params});
     console.log({result})
     expect(stub).to.have.been.called;
     done();

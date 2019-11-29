@@ -3,9 +3,9 @@ import {TYPES} from "./types";
 
 import {ComponentRoutes, IComponentRoutes} from "./components/components.routes";
 
-import {DemoRoute, IDemoRoute} from "./components/demo/demo.routes";
-import {DemoController, IDemoController} from "./components/demo/demo.controller";
-// import {DemoService, IDemoService} from "./components/demo/demo.service";
+import {TodoRoute, ITodoRoute} from "./components/todo/todo.routes";
+import {TodoController, ITodoController} from "./components/todo/todo.controller";
+// import {TodoService, ITodoService} from "./components/todo/todo.service";
 
 const container = new Container();
 
@@ -15,7 +15,7 @@ const container = new Container();
 // });
 
 // const applicationDependencies = new ContainerModule((bind) => {
-//   bind<IDemoSequelizeService>(TYPES.IDemoSequelizeService).to(DemoSequelizeService);
+//   bind<ITodoSequelizeService>(TYPES.ITodoSequelizeService).to(TodoSequelizeService);
 //   // ..
 // });
 
@@ -23,9 +23,9 @@ const container = new Container();
 
 container.bind<IComponentRoutes>(TYPES.IComponentRoutes).to(ComponentRoutes);
 
-container.bind<IDemoRoute>(TYPES.IDemoRoute).to(DemoRoute);
-container.bind<IDemoController>(TYPES.IDemoController).to(DemoController);
-// container.bind<IDemoService>(TYPES.IDemoService).to(DemoService);
+container.bind<ITodoRoute>(TYPES.ITodoRoute).to(TodoRoute);
+container.bind<ITodoController>(TYPES.ITodoController).to(TodoController);
+// container.bind<ITodoService>(TYPES.ITodoService).to(TodoService);
 
 function bindDependencies(func, dependencies) {
   let injections = dependencies.map((dependency) => {

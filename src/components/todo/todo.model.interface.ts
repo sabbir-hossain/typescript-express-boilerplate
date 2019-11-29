@@ -1,4 +1,4 @@
-export interface IDemoModel {
+export interface ITodoModel {
   id:string;
   name: string;
   code: string;
@@ -6,7 +6,7 @@ export interface IDemoModel {
   updatedAt: Date;
 }
 
-export const demoRules = {
+export const todoRules = {
   name: "string|required",
   code: "string|required"
 }

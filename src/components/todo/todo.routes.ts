@@ -2,21 +2,21 @@ import {Request, Response, NextFunction} from "express";
 import {inject, injectable} from "inversify";
 import {TYPES} from "../../types";
 
-import {IDemoController} from "./demo.controller";
+import {ITodoController} from "./todo.controller";
 
 import { errorHandler } from "../../helpers";
 
 @injectable()
-class DemoRoute implements IDemoRoute {
+class TodoRoute implements ITodoRoute {
 
-  private _demoController:IDemoController;
+  private _todoController:ITodoController;
 
-  constructor( @inject(TYPES.IDemoController) demoController:IDemoController ) {
-    this._demoController = demoController;
+  constructor( @inject(TYPES.ITodoController) todoController:ITodoController ) {
+    this._todoController = todoController;
   }
 
   create(req: Request, res: Response, next: NextFunction) {
-    return this._demoController.create(req.body)
+    return this._todoController.create(req.body)
       .then(resp => {
         return res.send(resp);
       })
@@ -26,8 +26,8 @@ class DemoRoute implements IDemoRoute {
   }
 }
 
-export {DemoRoute};
+export {TodoRoute};
 
-export interface IDemoRoute {
+export interface ITodoRoute {
   create(req: Request, res: Response, next: NextFunction);
 }

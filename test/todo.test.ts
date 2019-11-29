@@ -8,12 +8,12 @@ import {app} from "../src/app";
 
 describe("Demo Spec", () => {
 
-  let demoData, demoRouteUrl;
+  let todoData, todoRouteUrl;
 
   beforeEach((done) => {
-    demoRouteUrl = '/demo/create';
+    todoRouteUrl = '/todo/create';
 
-    demoData = {
+    todoData = {
       'validData': {
         "name": "test",
         "code": "test"
@@ -27,25 +27,25 @@ describe("Demo Spec", () => {
   });
 
    
-  it("Should call demo route url", done => {
+  it("Should call todo route url", done => {
     request( app )
-      .post( demoRouteUrl )
-      .send( demoData['validData'] )
+      .post( todoRouteUrl )
+      .send( todoData['validData'] )
       .set('Accept', 'application/json')
       .expect(200)
       .end( (err, resp) =>  {
         expect(err).to.be.null;
-        expect(resp.body).to.be.deep.equal(demoData["validData"])
+        expect(resp.body).to.be.deep.equal(todoData["validData"])
         expect(resp.body).to.have.property('name');
         expect(resp.body).to.have.property('code');
       })
       done();
   });
 
-  it("Should call demo route url with error response", done => {
+  it("Should call todo route url with error response", done => {
     request( app )
-      .post( demoRouteUrl )
-      .send( demoData['validData'] )
+      .post( todoRouteUrl )
+      .send( todoData['validData'] )
       .set('Accept', 'application/json')
       .expect(400)
       .end( (err, resp) =>  {

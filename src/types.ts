@@ -1,9 +1,9 @@
 let TYPES = {
   IComponentRoutes: Symbol("IComponentRoutes"),
 
-  IDemoRoute: Symbol("IDemoRoute"),
-  IDemoService: Symbol("IDemoService"),
-  IDemoController: Symbol("IDemoController")
+  ITodoRoute: Symbol("ITodoRoute"),
+  ITodoService: Symbol("ITodoService"),
+  ITodoController: Symbol("ITodoController")
 };
 
 export { TYPES };
