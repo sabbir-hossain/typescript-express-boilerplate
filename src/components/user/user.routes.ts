@@ -24,10 +24,22 @@ class UserRoute implements IUserRoute {
         return errorHandler(res, error);
       })
   }
+
+  login(req: Request, res: Response, next: NextFunction) {
+    return this._userController.userAuth(req.body)
+      .then(resp => {
+        return res.send(resp);
+      })
+      .catch(error => {
+        console.log({error})
+        return errorHandler(res, error);
+      })
+  }
 }
 
 export {UserRoute};
 
 export interface IUserRoute {
   create(req: Request, res: Response, next: NextFunction);
+  login(req: Request, res: Response, next: NextFunction);
 }

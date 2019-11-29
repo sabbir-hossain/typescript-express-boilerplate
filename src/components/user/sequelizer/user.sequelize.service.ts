@@ -40,6 +40,9 @@ export class UserSequelizeService  implements IUserSequelizeService  {
       role: {
         type: new DataTypes.ENUM( userRole.ADMIN, userRole.CLIENT )
       },
+      dbName: {
+        type: new DataTypes.STRING(128)
+      },
       createdAt: {
         type: new DataTypes.DATE,
         field: "created_at"
@@ -52,12 +55,25 @@ export class UserSequelizeService  implements IUserSequelizeService  {
   }
 
   create(data:IUserModel):Promise<IUserModel> {
-
+    data["dbName"] = "mysql";
     return new Promise( (resolve, reject) => {
       this._userSchema
           .create(data)
           .then(resp => resolve(resp))
           .catch(error => reject(error));
+    })
+  }
+
+  findByEmail(email:string):Promise<IUserModel> {
+    
+    return new Promise( (resolve, reject) => {
+      this._userSchema
+        .findOne({
+          where: { email }
+        })
+        .then(resp => resp && resp.dataValues)
+        .then(resp => resolve(resp))
+        .catch(error => reject(error));
     })
   }
 }
@@ -78,6 +94,7 @@ CREATE TABLE `tododb`.`users` (
   `encryptedPassword` VARCHAR(245) NOT NULL,
   `status` VARCHAR(245) NULL,
   `role` VARCHAR(245) NULL,
+  `dbName` VARCHAR(245) NULL,
   `created_at` DATE NULL,
   `modified_at` DATE NULL,
   PRIMARY KEY (`id`)

@@ -8,6 +8,7 @@ export interface IUserModel {
   encryptedPassword: string;
   status: string;
   role?:string;
+  dbName?:string;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -23,8 +24,13 @@ export interface IUserSignUpModel {
   updatedAt?: Date;
 }
 
+export interface IUserSignInModel {
+  email: string;
+  password: string;
+}
+
 export const userRules = {
-  name: "string|required",
+  name: "string",
   email: "email|required",
   password: "required",
   status: `string|in:${userStatus.ACTIVE},${userStatus.IN_ACTIVE},${userStatus.DELETED}`,

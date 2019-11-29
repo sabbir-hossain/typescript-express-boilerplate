@@ -3,7 +3,7 @@ import { inject, injectable } from "inversify";
 import { TYPES } from "../../types";
 
 import { ITodoController } from "./todo.controller";
-
+import { Authorize } from "../common"
 import { errorHandler } from "../../helpers";
 
 @injectable()
@@ -15,6 +15,7 @@ class TodoRoute implements ITodoRoute {
     this._todoController = todoController;
   }
 
+  @Authorize
   create(req: Request, res: Response, next: NextFunction) {
     return this._todoController.create(req.body)
       .then(resp => {

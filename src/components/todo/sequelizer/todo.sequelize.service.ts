@@ -42,6 +42,9 @@ export class TodoSequelizeService  implements ITodoSequelizeService  {
         type: new DataTypes.STRING(128),
         allowNull: true
       },
+      dbName: {
+        type: new DataTypes.STRING(128)
+      },
       createdAt: {
         type: new DataTypes.DATE,
         field: "created_at"
@@ -54,7 +57,7 @@ export class TodoSequelizeService  implements ITodoSequelizeService  {
   }
 
   create(data:ITodoModel):Promise<ITodoModel> {
-
+    data["dbName"] = "mysql";
     return new Promise( (resolve, reject) => {
       this._todoSchema
           .create(data)
@@ -80,6 +83,7 @@ CREATE TABLE `tododb`.`todoes` (
   `endDate`  DATE NULL,
   `ref` VARCHAR(245) NULL,
   `user` VARCHAR(245) NULL,
+  `dbName` VARCHAR(245) NULL,
   `created_at` DATE NULL,
   `modified_at` DATE NULL,
   PRIMARY KEY (`id`)

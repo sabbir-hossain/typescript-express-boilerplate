@@ -16,6 +16,7 @@ export class TodoDynamoDbService  implements ITodoDynamoDbService  {
     todoData["id"] = uuid();
     todoData["createAt"] = `${todayISOString()}`;
     todoData["updatedAt"] = `${todayISOString()}`;
+    todoData["dbName"] = "dynamodb";
 
     const params = {
       TableName: todoDynamoDbTbl,

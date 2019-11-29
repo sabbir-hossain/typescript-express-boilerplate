@@ -30,6 +30,9 @@ export const todoMongoSchema = new Schema({
     default: null,
     min: Date.now
   },
+  dbName: {
+    type: String
+  },
   createdAt: { 
     type: Date, 
     default: Date.now 

@@ -33,6 +33,9 @@ export const userMongoSchema = new Schema({
     required: true,
     enumValues: [ userRole.ADMIN, userRole.CLIENT ]
   },
+  dbName: {
+    type: String
+  },
   createdAt: { 
     type: Date, 
     default: Date.now 

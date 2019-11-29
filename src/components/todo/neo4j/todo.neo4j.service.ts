@@ -16,6 +16,7 @@ export class TodoNeo4jService  implements ITodoNeo4jService  {
     todoData["id"] = uuid();
     todoData["createAt"] = `${todayISOString()}`;
     todoData["updatedAt"] = `${todayISOString()}`;
+    todoData["dbName"] = "neo4j";
 
     return new Promise( (resolve, reject) => {
       const query = `CREATE (td:${todoNeo4jTbl} ${Neo4j.insertQuery(todoData)})

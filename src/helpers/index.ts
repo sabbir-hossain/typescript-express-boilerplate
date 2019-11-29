@@ -24,6 +24,8 @@ import { today, todayISOString } from "./date";
 
 import { errorHandler } from "./responseHandler";
 
+import { authVerify, generateToken } from "./jwt";
+
 export {
   uuid,
   throwError,
@@ -45,5 +47,9 @@ export {
   todayISOString,
 
   // response
-  errorHandler
+  errorHandler,
+
+  // jwt
+  authVerify, 
+  generateToken,
 };

@@ -39,8 +39,21 @@ export class UserService  implements IUserService  {
     return Promise.all(result)
       .catch(error => Promise.reject(error))
   }
+
+  findByEmail(email):Promise<any> {
+    const result = [ 
+      this._userMongooseService.findByEmail(email),
+      this._userSequelizeService.findByEmail(email),
+      this._userDynamoDbService.findByEmail(email),
+      this._userNeo4jService.findByEmail(email)
+    ];
+
+    return Promise.all(result)
+      .catch(error => Promise.reject(error))
+  }
 }
 
 export interface IUserService {
   create(data:IUserModel):Promise<IUserModel[]>;
+  findByEmail(email):Promise<any>;
 }

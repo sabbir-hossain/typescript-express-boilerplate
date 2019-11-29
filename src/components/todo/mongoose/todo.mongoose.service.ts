@@ -7,6 +7,7 @@ import {ITodoMethods} from "../todo.methods.interface";
 export class TodoMongooseService  implements ITodoMongooseService  {
 
   create(data:ITodoModel):Promise<ITodoModel> {
+    // data['dbName'] = "mongodb";
     const newTodo =  new TodoMongooseModel(data);
 
     return new Promise( (resolve, reject) => {
