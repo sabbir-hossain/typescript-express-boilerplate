@@ -1,8 +1,9 @@
 import {injectable, inject} from "inversify";
+import * as crypto from "crypto";
 import {TYPES} from "../../types";
 
 import {IUserMethods} from "./user.methods.interface";
-import {IUserModel, userRules} from "./user.model.interface";
+import {IUserModel, IUserSignUpModel, userRules} from "./user.model.interface";
 import { IUserService} from "./user.service";
 import { userStatus, userRole } from "../../config";
 import { validation } from './../../helpers/validator';
@@ -14,7 +15,7 @@ export class UserController implements IUserController {
     this._userService = userService;
   }
 
-  create(data:IUserModel):any {
+  create(data:IUserSignUpModel):Promise<IUserModel[]> {
     try {
       const {
         name, 
@@ -25,8 +26,19 @@ export class UserController implements IUserController {
       } = data;
 
       validation(data, userRules);
+
+      let salt, encryptedPassword = ';'
+
+      if (password !== undefined || password !== null || password !== "") {
+        salt = crypto.randomBytes(512).toString('base64');
+  
+        encryptedPassword = crypto.pbkdf2Sync(
+          password, new Buffer(salt), 10000, 64, 'sha512').toString('base64');
+      } else {
+        salt = null;
+      }
       
-      return this._userService.create({name, email, password, status, role })
+      return this._userService.create({name, email, salt, encryptedPassword, status, role })
         .catch(error => Promise.reject(error))
     } catch (err) {
       return Promise.reject(err);
@@ -35,6 +47,6 @@ export class UserController implements IUserController {
 
 }
 
-export interface IUserController extends IUserMethods{
-
+export interface IUserController {
+  create(data:IUserSignUpModel):Promise<IUserModel[]>
 }

@@ -9,7 +9,15 @@ export const userMongoSchema = new Schema({
     trim: true,
     regExp: /\w+/ig
   },
-  password: {
+  email: {
+    type: String, 
+    required: true
+  },
+  salt: {
+    type: String,
+    required: true
+  },
+  encryptedPassword: {
     type: String,
     required: true
   },

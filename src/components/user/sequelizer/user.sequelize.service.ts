@@ -20,15 +20,18 @@ export class UserSequelizeService  implements IUserSequelizeService  {
 
     this._userSchema = sequelize.define(userSequelizeTbl, {
       name: {
-        type: new DataTypes.STRING(128),
-        allowNull: false,
+        type: new DataTypes.STRING(128)
       },
       email: {
         type: new DataTypes.STRING(128),
         allowNull: false,
       },
-      password: {
-        type: new DataTypes.STRING(128),
+      salt: {
+        type: new DataTypes.TEXT,
+        allowNull: false,
+      },
+      encryptedPassword: {
+        type: new DataTypes.TEXT,
         allowNull: false,
       },
       status: {
@@ -70,8 +73,9 @@ export interface IUserSequelizeService  extends IUserMethods {
 CREATE TABLE `tododb`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(245) NULL,
-  `email` VARCHAR(245) NULL,
-  `password` VARCHAR(245) NULL,
+  `email` VARCHAR(245) NOT NULL,
+  `salt` TEXT NOT NULL,
+  `encryptedPassword` VARCHAR(245) NOT NULL,
   `status` VARCHAR(245) NULL,
   `role` VARCHAR(245) NULL,
   `created_at` DATE NULL,
