@@ -1,7 +1,7 @@
 import * as mongoose from "mongoose";
 
 import { ENV, configENV } from "../../config/index";
-console.log({ ENV, configENV})
+
 const { host, port, username, password, db:dbName } = configENV["mongo"].db;
 
 const mongoURI = ENV === 'prod'
@@ -23,7 +23,7 @@ db.on('open', function callback(err) {
   if (err) {
     console.log('err db : ', err);
   } else {
-    console.log(`${dbName} is connected`);
+    console.log(`MongoDB "${dbName}" is connected`);
   }
 });
 

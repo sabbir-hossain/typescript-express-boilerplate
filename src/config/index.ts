@@ -12,3 +12,5 @@ export const configDB = configENV[DB_ENV];
 
 export const todoMongoTbl = collectionsList.todoMongoTbl;
 export const todoStatus = collectionsList.todoStatus;
+
+export const todoSequelizeTbl = collectionsList.todoSequelizeTbl;

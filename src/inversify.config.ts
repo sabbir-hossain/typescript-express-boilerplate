@@ -1,4 +1,6 @@
 import {Container, ContainerModule } from "inversify";
+import * as sequelize from "sequelize";
+import { ISequelize } from "./database/sequelize/sequelize.interface";
 import {TYPES} from "./types";
 
 import {ComponentRoutes, IComponentRoutes} from "./components/components.routes";
@@ -7,20 +9,21 @@ import {TodoRoute, ITodoRoute} from "./components/todo/todo.routes";
 import {TodoController, ITodoController} from "./components/todo/todo.controller";
 import {TodoService, ITodoService} from "./components/todo/todo.service";
 import { ITodoMongooseService, TodoMongooseService } from "./components/todo/mongoose/todo.mongoose.service";
+import {ITodoSequelizeService, TodoSequelizeService} from "./components/todo/sequelizer/todo.sequelize.service";
 
 const container = new Container();
 
-// const thirdPartyDependencies = new ContainerModule((bind) => {
-//   bind<ISequelize>(TYPES.ISequelize).toConstantValue(sequelize);
-//   // ..
-// });
+const thirdPartyDependencies = new ContainerModule((bind) => {
+  bind<ISequelize>(TYPES.ISequelize).toConstantValue(sequelize);
+  // ..
+});
 
-// const applicationDependencies = new ContainerModule((bind) => {
-//   bind<ITodoSequelizeService>(TYPES.ITodoSequelizeService).to(TodoSequelizeService);
-//   // ..
-// });
+const applicationDependencies = new ContainerModule((bind) => {
+  bind<ITodoSequelizeService>(TYPES.ITodoSequelizeService).to(TodoSequelizeService);
+  // ..
+});
 
-// container.load(thirdPartyDependencies, applicationDependencies);
+container.load(thirdPartyDependencies, applicationDependencies);
 
 container.bind<IComponentRoutes>(TYPES.IComponentRoutes).to(ComponentRoutes);
 

@@ -1,3 +1,11 @@
 import { mongoose, ObjectId } from "./mongoose";
+import { sequelize } from "./mysql";
 
-export { mongoose, ObjectId };
+export { 
+  // mongodb
+  mongoose, 
+  ObjectId, 
+
+  // mysql - sequelize
+  sequelize 
+};
