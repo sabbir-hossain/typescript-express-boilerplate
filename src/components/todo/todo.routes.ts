@@ -21,7 +21,7 @@ class TodoRoute implements ITodoRoute {
         return res.send(resp);
       })
       .catch(error => {
-        console.log({error})
+        console.error({error})
         return errorHandler(res, error);
       })
   }

@@ -1,5 +1,7 @@
 import { mongoose, ObjectId } from "./mongoose";
 import { sequelize } from "./mysql";
+import { docClient } from './dynamo';
+import * as Neo4j from "./neo4j";
 
 export { 
   // mongodb
@@ -7,5 +9,10 @@ export {
   ObjectId, 
 
   // mysql - sequelize
-  sequelize 
+  sequelize,
+
+  // dynamoDB
+  docClient,
+
+  Neo4j
 };

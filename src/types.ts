@@ -7,7 +7,9 @@ let TYPES = {
   ITodoController: Symbol("ITodoController"),
   ITodoService: Symbol("ITodoService"),
   ITodoMongooseService: Symbol("ITodoMongooseService"),
-  ITodoSequelizeService: Symbol("ITodoSequelizeService")
+  ITodoSequelizeService: Symbol("ITodoSequelizeService"),
+  ITodoNeo4jService: Symbol("ITodoNeo4jService"),
+  ITodoDynamoDbService: Symbol("ITodoDynamoDbService"),
 };
 
 export { TYPES };

@@ -7,3 +7,7 @@ export enum todoStatus {
 }
 
 export const todoSequelizeTbl = "todo";
+
+export const todoNeo4jTbl = "todo";
+
+export const todoDynamoDbTbl = "todo";
