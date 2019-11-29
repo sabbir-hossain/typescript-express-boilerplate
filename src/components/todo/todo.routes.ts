@@ -1,8 +1,8 @@
-import {Request, Response, NextFunction} from "express";
-import {inject, injectable} from "inversify";
-import {TYPES} from "../../types";
+import { Request, Response, NextFunction } from "express";
+import { inject, injectable } from "inversify";
+import { TYPES } from "../../types";
 
-import {ITodoController} from "./todo.controller";
+import { ITodoController } from "./todo.controller";
 
 import { errorHandler } from "../../helpers";
 
@@ -21,7 +21,6 @@ class TodoRoute implements ITodoRoute {
         return res.send(resp);
       })
       .catch(error => {
-        console.error({error})
         return errorHandler(res, error);
       })
   }

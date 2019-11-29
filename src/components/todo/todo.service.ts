@@ -1,7 +1,7 @@
-import {injectable, inject} from "inversify";
+import { injectable, inject } from "inversify";
 
-import {TYPES} from "../../types";
-import {ITodoModel} from "./todo.model.interface";
+import { TYPES } from "../../types";
+import { ITodoModel } from "./todo.model.interface";
 
 import { ITodoMongooseService } from "./mongoose/todo.mongoose.service";
 import { ITodoSequelizeService } from "./sequelizer/todo.sequelize.service";
@@ -30,10 +30,10 @@ export class TodoService  implements ITodoService  {
 
   create(data:ITodoModel):Promise<ITodoModel[]> {
     const result = [ 
-      // this._todoMongooseService.create(data),
-      // this._todoSequelizeService.create(data),
+      this._todoMongooseService.create(data),
+      this._todoSequelizeService.create(data),
       this._todoDynamoDbService.create(data),
-      // this._todoNeo4jService.create(data)
+      this._todoNeo4jService.create(data)
     ];
 
     return Promise.all(result)

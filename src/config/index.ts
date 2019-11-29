@@ -1,5 +1,6 @@
 import * as configInfo from "../../config.json";
-import * as todoCollecton from "./todo.collection";
+import * as todoTable from "./todo.table";
+import * as userTable from "./user.table";
 
 export const config = configInfo;
 
@@ -10,10 +11,18 @@ export const configENV = config[ENV];
 
 export const configDB = configENV[DB_ENV];
 
-export const todoMongoTbl = todoCollecton.todoMongoTbl;
-export const todoStatus = todoCollecton.todoStatus;
+export const todoMongoTbl = todoTable.todoMongoTbl;
+export const todoStatus = todoTable.todoStatus;
 
-export const todoSequelizeTbl = todoCollecton.todoSequelizeTbl;
+export const todoSequelizeTbl = todoTable.todoSequelizeTbl;
 
-export const todoNeo4jTbl = todoCollecton.todoNeo4jTbl;
-export const todoDynamoDbTbl = todoCollecton.todoDynamoDbTbl;
+export const todoNeo4jTbl = todoTable.todoNeo4jTbl;
+export const todoDynamoDbTbl = todoTable.todoDynamoDbTbl;
+
+export const userMongoTbl = userTable.userMongoTbl;
+export const userStatus = userTable.userStatus;
+
+export const userSequelizeTbl = userTable.userSequelizeTbl;
+
+export const userNeo4jTbl = userTable.userNeo4jTbl;
+export const userDynamoDbTbl = userTable.userDynamoDbTbl;
