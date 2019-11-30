@@ -17,13 +17,28 @@ class TodoRoute implements ITodoRoute {
 
   @Authorize
   create(req: Request, res: Response, next: NextFunction) {
-    return this._todoController.create(req.body)
+    return req.decoded && req.decoded.payload ? this._todoController.create(req.decoded.payload, req.body)
       .then(resp => {
         return res.send(resp);
       })
       .catch(error => {
         return errorHandler(res, error);
       })
+      :
+      errorHandler(res,  { status: 401 });
+  }
+
+  @Authorize
+  list(req: Request, res: Response, next: NextFunction) {
+    return req.decoded && req.decoded.payload ? this._todoController.list(req.decoded.payload)
+      .then(resp => {
+        return res.send(resp);
+      })
+      .catch(error => {
+        return errorHandler(res, error);
+      })
+      :
+      errorHandler(res,  { status: 401 });
   }
 }
 
@@ -31,4 +46,5 @@ export {TodoRoute};
 
 export interface ITodoRoute {
   create(req: Request, res: Response, next: NextFunction);
+  list(req: Request, res: Response, next: NextFunction);
 }

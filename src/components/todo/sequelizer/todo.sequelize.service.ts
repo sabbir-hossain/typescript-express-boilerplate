@@ -56,13 +56,29 @@ export class TodoSequelizeService  implements ITodoSequelizeService  {
     })
   }
 
-  create(data:ITodoModel):Promise<ITodoModel> {
+  create(decoded:IPayload, data:ITodoModel):Promise<ITodoModel> {
+    const {mysql_id="" } = decoded || {};
     data["dbName"] = "mysql";
+    data["user"] = mysql_id;
     return new Promise( (resolve, reject) => {
       this._todoSchema
           .create(data)
           .then(resp => resolve(resp))
           .catch(error => reject(error));
+    })
+  }
+
+  list(decoded:IPayload):Promise<any> {
+    const {mysql_id="" } = decoded || {};
+    return new Promise( (resolve, reject) => {
+      this._todoSchema.findAll({
+        where: { user: mysql_id }
+      })
+      // .then(resp => {
+      //   return resp && resp.dataValues
+      // })
+      .then(resp => resolve({ mysql: resp }))
+      .catch(error => reject(error));
     })
   }
 }
@@ -75,7 +91,7 @@ export interface ITodoSequelizeService  extends ITodoMethods {
 
 /*
 
-CREATE TABLE `tododb`.`todoes` (
+CREATE TABLE `tododb`.`todos` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(245) NULL,
   `status` VARCHAR(245) NULL,

@@ -32,7 +32,7 @@ const thirdPartyDependencies = new ContainerModule((bind) => {
 
 const applicationDependencies = new ContainerModule((bind) => {
   bind<ITodoSequelizeService>(TYPES.ITodoSequelizeService).to(TodoSequelizeService);
-  bind<ITodoSequelizeService>(TYPES.IUserSequelizeService).to(UserSequelizeService);
+  bind<IUserSequelizeService>(TYPES.IUserSequelizeService).to(UserSequelizeService);
   // ..
 });
 

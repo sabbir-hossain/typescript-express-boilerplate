@@ -14,17 +14,21 @@ export class TodoController implements ITodoController {
     this._todoService = todoService;
   }
 
-  create(data:ITodoModel):any {
+  create(decoded:IPayload,  data:ITodoModel):any {
     try {
       const {name, status=todoStatus.IN_PROGRESS, ref, startDate, endDate} = data;
       validation(data, todoRules);
-      return this._todoService.create({name, status, ref, startDate, endDate })
+      return this._todoService.create(decoded, {name, status, ref, startDate, endDate })
         .catch(error => Promise.reject(error))
     } catch (err) {
       return Promise.reject(err);
     }
   }
 
+  list(decoded:IPayload):any {
+    return this._todoService.list(decoded)
+      .catch(error => Promise.reject(error))
+  }
 }
 
 export interface ITodoController extends ITodoMethods{

@@ -17,6 +17,7 @@ export const todoStatus = todoTable.status;
 export const todoSequelizeTbl = todoTable.sequelizeTbl;
 export const todoNeo4jTbl = todoTable.neo4jTbl;
 export const todoDynamoDbTbl = todoTable.dynamoDbTbl;
+export const todoDDBListIndex = todoTable.dynamoDbListIndex;
 
 // User Table
 export const userMongoTbl = userTable.mongoTbl;

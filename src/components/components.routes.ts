@@ -22,6 +22,7 @@ export class ComponentRoutes implements IComponentRoutes {
   setupRoutes(app): any {
     // Todo
     this.router.post("/todo/create", this.todoRoute.create.bind(this.todoRoute))
+    this.router.get("/todo/list", this.todoRoute.list.bind(this.todoRoute))
 
     // User
     this.router.post("/signup", this.userRoute.create.bind(this.userRoute));

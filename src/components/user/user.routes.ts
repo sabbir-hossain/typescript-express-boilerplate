@@ -31,7 +31,6 @@ class UserRoute implements IUserRoute {
         return res.send(resp);
       })
       .catch(error => {
-        console.log({error})
         return errorHandler(res, error);
       })
   }

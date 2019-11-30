@@ -28,12 +28,24 @@ export class TodoService  implements ITodoService  {
     this._todoNeo4jService = todoNeo4jService;
   }
 
-  create(data:ITodoModel):Promise<ITodoModel[]> {
+  create(decoded:IPayload, data:ITodoModel):Promise<ITodoModel[]> {
     const result = [ 
-      this._todoMongooseService.create(data),
-      this._todoSequelizeService.create(data),
-      this._todoDynamoDbService.create(data),
-      this._todoNeo4jService.create(data)
+      this._todoMongooseService.create(decoded, data),
+      this._todoSequelizeService.create(decoded, data),
+      this._todoDynamoDbService.create(decoded, data),
+      this._todoNeo4jService.create(decoded, data)
+    ];
+
+    return Promise.all(result)
+      .catch(error => Promise.reject(error))
+  }
+
+  list(decoded:IPayload):Promise<any> {
+    const result = [ 
+      this._todoMongooseService.list(decoded),
+      this._todoSequelizeService.list(decoded),
+      this._todoDynamoDbService.list(decoded),
+      this._todoNeo4jService.list(decoded)
     ];
 
     return Promise.all(result)
@@ -42,5 +54,6 @@ export class TodoService  implements ITodoService  {
 }
 
 export interface ITodoService {
-  create(data:ITodoModel):Promise<ITodoModel[]>;
+  create(decoded:IPayload, data:ITodoModel):Promise<ITodoModel[]>;
+  list(decoded:IPayload):Promise<ITodoModel[]>;
 }

@@ -8,7 +8,7 @@ export interface ITodoModel {
   endDate?:Date;
   ref?: string;
   user?:string;
-  db?:string;
+  dbName?:string;
   createdAt?: Date;
   updatedAt?: Date;
 }

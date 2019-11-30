@@ -4,19 +4,20 @@ import {ITodoModel} from "../todo.model.interface";
 import {ITodoMethods} from "../todo.methods.interface";
 
 import { uuid, todayISOString, removeEmptyObject } from "../../../helpers";
-import { todoDynamoDbTbl } from "../../../config";
+import { todoDynamoDbTbl, todoDDBListIndex } from "../../../config";
 import { docClient } from "../../../database";
 
 @injectable()
 export class TodoDynamoDbService  implements ITodoDynamoDbService  {
 
-  create(data:ITodoModel):Promise<any> {
-
+  create(decoded:IPayload, data:ITodoModel):Promise<any> {
+    const { dynamodb_id="" } = decoded || {};
     const todoData = removeEmptyObject(data);
     todoData["id"] = uuid();
     todoData["createAt"] = `${todayISOString()}`;
     todoData["updatedAt"] = `${todayISOString()}`;
     todoData["dbName"] = "dynamodb";
+    todoData["user"] = dynamodb_id;
 
     const params = {
       TableName: todoDynamoDbTbl,
@@ -29,6 +30,30 @@ export class TodoDynamoDbService  implements ITodoDynamoDbService  {
           return reject(error);
         }
         return resolve(todoData);
+      })
+    })
+  }
+
+  list(decoded:IPayload):Promise<any> {
+    const { dynamodb_id="" } = decoded || {};
+    const params = {
+      TableName: todoDynamoDbTbl,
+      IndexName: todoDDBListIndex,
+      KeyConditionExpression: "#user = :user",
+      ExpressionAttributeNames: {
+        "#user": "user"
+      },
+      ExpressionAttributeValues: {
+        ":user": dynamodb_id
+      }
+    }
+
+    return new Promise( (resolve, reject) => {
+      docClient.query(params, (error, resp) => {
+        if(error) {
+          return reject(error);
+        }
+        return resolve({dynamodb: resp.Items });
       })
     })
   }
@@ -75,11 +100,11 @@ var params = {
             IndexName: 'user_status_index', 
             KeySchema: [
                 { // Required HASH type attribute
-                    AttributeName: 'status',
+                    AttributeName: 'user',
                     KeyType: 'HASH',
                 },
                 { // Optional RANGE key type for HASH + RANGE secondary indexes
-                    AttributeName: 'user', 
+                    AttributeName: 'status', 
                     KeyType: 'RANGE', 
                 }
             ],

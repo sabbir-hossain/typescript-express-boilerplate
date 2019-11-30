@@ -27,6 +27,7 @@ db.on('open', function callback(err) {
   }
 });
 
-const ObjectId = mongoose.Schema.Types.ObjectId;
+// const ObjectId = mongoose.Schema.Types.ObjectId;
+const ObjectId = mongoose.Types.ObjectId
 
 export { db, mongoose, ObjectId };

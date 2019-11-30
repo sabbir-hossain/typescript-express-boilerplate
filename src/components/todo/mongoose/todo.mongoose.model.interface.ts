@@ -1,6 +1,7 @@
 import { mongoose, ObjectId } from "../../../database";
+import { todoMongoTbl, todoStatus, userMongoTbl } from "../../../config";
+
 const Schema = mongoose.Schema;
-import { todoMongoTbl, todoStatus } from "../../../config";
 
 export const todoMongoSchema = new Schema({
   name: {
@@ -15,11 +16,11 @@ export const todoMongoSchema = new Schema({
     required: true,
     enumValues: [ todoStatus.COMPLETE, todoStatus.IN_COMPLETE, todoStatus.IN_PROGRESS ]
   },
-  ref: {
+  ref: [{
     type: ObjectId,
     index: true,
     default: null
-  },
+  }],
   startDate: {
     type: Date,
     default: null,
@@ -29,6 +30,10 @@ export const todoMongoSchema = new Schema({
     type: Date,
     default: null,
     min: Date.now
+  },
+  user: {
+    type: ObjectId,
+    ref: `${userMongoTbl}`
   },
   dbName: {
     type: String

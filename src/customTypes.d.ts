@@ -1,20 +1,18 @@
 declare namespace Express {
   interface Request {
-    decoded: Ipayload | any;
+    decoded: IPayload | any;
   }
 }
 
 interface IPayload {
-  id: string
-  fullName: string
+  mongodb_id: string
+  mysql_id: string
+  dynamodb_id: string
+  neo4j_id: string
+  name: string
   email: string
-  phone: string
+  status: string
+  role: string
   created: string
   updated: string
-}
-
-interface Ipayload {
-  payload: IPayload
-  fbToken: string
-  iat: number
 }

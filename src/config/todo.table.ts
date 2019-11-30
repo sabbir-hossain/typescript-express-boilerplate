@@ -1,4 +1,4 @@
-export const mongoTbl = "";
+export const mongoTbl = "todo";
 
 export enum status {
   COMPLETE="COMPLETE",
@@ -6,8 +6,9 @@ export enum status {
   IN_PROGRESS="IN_PROGRESS"
 }
 
-export const sequelizeTbl = "";
+export const sequelizeTbl = "todo";
 
-export const neo4jTbl = "";
+export const neo4jTbl = "todo";
 
-export const dynamoDbTbl = "";
+export const dynamoDbTbl = "todo";
+export const dynamoDbListIndex = "user_status_index";
