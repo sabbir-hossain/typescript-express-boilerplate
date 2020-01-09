@@ -15,20 +15,20 @@ const sandbox = sinon.createSandbox();
 
 import {TYPES} from "../src/types";
 import {container, bindDependencies} from "../src/inversify.config";
-import { ITodoController } from "../src/components/todo/todo.controller";
-import { ITodoRoute } from "../src/components/todo/todo.routes";
+import { TodoController, ITodoController } from "../src/components/todo/todo.controller";
 
+import { ITodoRoute } from "../src/components/todo/todo.routes";
+import { TodoService, ITodoService } from './../src/components/todo/todo.service';
+
+// nyc mocha -r ts-node/register test/**/*
 describe.only("Todo Spec 2", () => {
 
-  let todoData, todoRouteUrl, todoController, todoRoute, insertStub;
+  let todoData, todoRouteUrl, todoController, todoRoute;
   
-  todoController = container.get<ITodoController>(TYPES.ITodoController);
+  let todoService = container.get<ITodoService>(TYPES.ITodoService);
   todoRouteUrl = '/todo/create';
-
+  let insertStub : sinon.SinonStub<any, any>;
   beforeEach((done) => {
-    
-    
-    
     // let warriors = new ContainerModule((bind: Bind) => {
     //   bind<ITodoController>(TYPES.ITodoController).to(Ninja);
     // });
@@ -37,7 +37,7 @@ describe.only("Todo Spec 2", () => {
     // thisContainer.load(todoController);
     // todoRoute = bindDependencies(route.create, [TYPES.ITodoController]);
 
-    insertStub = sandbox.stub(todoController, 'create');
+    insertStub = sandbox.stub(TodoService.prototype, 'create');
 
     todoData = {
       'validData': {
@@ -60,9 +60,14 @@ describe.only("Todo Spec 2", () => {
 
   it("Should call todo route url", async done => {
     // console.log({todoRoute});
-    todoRoute  = container.get<ITodoRoute>(TYPES.ITodoRoute);
+    todoController  = container.get<ITodoController>(TYPES.ITodoController);
+    // let todoService = container.get<ITodoService>(TYPES.ITodoService);
     const stub =  insertStub.returns( { name: "test xyz", code: "test abc"});
-    const result = await todoRoute.create({body: todoData.validData}, {send: (params) => params});
+    const req = {
+      decoded: { payload: {}},
+      data: todoData.validData
+    }
+    const result = await todoController.create(req.decoded, req.data);
     console.log({result})
     expect(stub).to.have.been.called;
     done();

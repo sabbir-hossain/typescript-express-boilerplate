@@ -1,9 +1,12 @@
-import "reflect-metadata";
-import {expect} from "chai";
+// import "reflect-metadata";
+// import * as mocha from "mocha";
+// import * as chai from "chai";
+// import * as request from "supertest";
+// const expect = chai.expect;
 
-describe('chai test', () => {
+// describe.skip('chai test', () => {
 
-  it('should compare some values', () => {
-    expect(1).to.equal(1);
-  })
-})
+//   it('should compare some values', () => {
+//     expect(1).to.equal(1);
+//   })
+// })
