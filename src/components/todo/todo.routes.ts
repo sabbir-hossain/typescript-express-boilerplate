@@ -15,15 +15,16 @@ class TodoRoute implements ITodoRoute {
     this._todoController = todoController;
   }
 
-  // @Authorize
+  @Authorize
   create(req: Request, res: Response, next: NextFunction) {
-    return this._todoController.create(req.decoded.payload, req.body)
+    return req.decoded && req.decoded.payload ? this._todoController.create(req.decoded.payload, req.body)
       .then(resp => {
         return res.send(resp);
       })
       .catch(error => {
         return errorHandler(res, error);
       })
+      : errorHandler(res,  { status: 401 });
   }
 
   @Authorize
